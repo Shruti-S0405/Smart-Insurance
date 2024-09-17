@@ -1,18 +1,48 @@
-import pyodbc
+import mysql.connector 
 import json
 
-with open(r"src\api\config.json")as json_conf:
-     config=json.load(json_conf)
 
-class ServiceProviderDatabase:
+class SmartInsuranceDatabase:
     def __init__(self):
-        self.conn=pyodbc.connect(config["databaseConnection"]) #Establish connect with the database
-        self.cursor=self.conn.cursor() #Create cursor
+        self.mydb=mysql.connector.connect(
+        host="localhost", 
+        user="root", 
+        password="password",
+        database="smartinsurance")
 
-    def servie_providers(self,id): 
-        self.cursor.execute("{call ServiceProviders(?)}",(id))
-        rows=self.cursor.fetchall()
-        content=[{'id':row.ID,'name':row.NAME, 'region_id': row.REGION_ID, 'region': row.REGION, 'year':row.year, 'status':row.STATUS,} for row in rows]
-        data={"ServiceProvider":{"ServiceProviderID":id,"ServiceProviderDetails":content}}
-        self.cursor.close()
-        return data
+        self.cur=self.mydb.cursor()
+
+
+    def get_all_serviceprovider(self):
+        self.cur.callproc('GetAllServiceProviders')
+        data = {'serviceProviderDetails':[]}
+
+        for result in self.cur.stored_results():
+            rows = result.fetchall()  # Fetch all rows
+        for row in rows:
+            result={"provider_id":row[0], 'name':row[1], 'provider_type':row[2], 'region_id':row[3], 'status':row[4], 'no_of_claims':row[5]}
+            data['serviceProviderDetails'].append(result)
+        self.cur.close()
+        self.mydb.close()
+        return(data)
+
+
+    def get_all_claims(self, id):
+        self.cur.callproc('GetAllClaims', [id])
+        data={'claimDetails':[]}
+
+        for result in self.cur.stored_results():
+            rows = result.fetchall()  # Fetch all rows
+        for row in rows:
+            result={'service_provider':id, "claim_id":row[0], 'ai_check':row[1], 'status':row[2], 'service_name':row[3]}
+            data['claimDetails'].append(result)
+        self.cur.close()
+        self.mydb.close()
+        return(data)
+
+
+
+if __name__=='__main__':
+    obj=SmartInsuranceDatabase()
+    result=obj.get_all_claims(5001)
+    print(result)
