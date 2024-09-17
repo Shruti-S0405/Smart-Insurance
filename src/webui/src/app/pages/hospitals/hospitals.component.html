@@ -1,0 +1,37 @@
+<div class="container-fluid">
+    <div class="header-container">
+      <strong class="header-text">List of Hospitals and the number of Claims</strong>
+    </div>
+    <div class="card-body">
+      <div *ngIf="serviceProvider && serviceProvider.length > 0; else noData">
+        <table class="table table-bordered">
+          <thead style="background-color: #f8f9fa;">
+            <tr>
+              <th scope="col">S.No</th>
+              <th scope="col">Provider ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Type</th>
+              <th scope="col">Region ID</th>
+              <th scope="col">Status</th>
+              <th scope="col">No. of Claims</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let provider of serviceProvider; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ provider.provider_id }}</td>
+              <td>{{ provider.name }}</td>
+              <td>{{ provider.provider_type }}</td>
+              <td>{{ provider.region_id }}</td>
+              <td>{{ provider.status }}</td>
+              <td>{{ provider.no_of_claims }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ng-template #noData>
+        <p>No hospital data available.</p>
+      </ng-template>
+    </div>
+  </div>
+  
