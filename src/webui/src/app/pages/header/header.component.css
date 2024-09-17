@@ -1,0 +1,39 @@
+
+.header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+
+  .logo img{
+    text-decoration: none;
+    color: #007bff;
+    font-size: 18px;
+    margin-left: 20px;
+  }
+
+  .center{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+  }
+
+  .member-portal{
+    text-decoration: none;
+    color: #007bff;
+    font-size: 18px;
+  }
+
+  .logout img{
+    height: 30px;
+  }
+
+  .logout a{
+    text-decoration: none;
+    text-align: end;
+  }
+ 
