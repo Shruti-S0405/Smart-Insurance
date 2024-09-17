@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="header-container">
-      <strong class="header-text">List of Hospitals and the number of Claims</strong>
+      <strong class="header-text">List of Service Providers and the number of Claims</strong>
     </div>
     <div class="card-body">
       <div *ngIf="serviceProvider && serviceProvider.length > 0; else noData">
@@ -8,12 +8,12 @@
           <thead style="background-color: #f8f9fa;">
             <tr>
               <th scope="col">S.No</th>
-              <th scope="col">Provider ID</th>
-              <th scope="col">Name</th>
-              <th scope="col">Type</th>
-              <th scope="col">Region ID</th>
-              <th scope="col">Status</th>
+              <th scope="col">Service Provider ID</th>
+              <th scope="col">Service Provider Name</th>
+              <th scope="col">Provider Type</th>
+              <th scope="col">Region</th>
               <th scope="col">No. of Claims</th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody>
@@ -22,9 +22,9 @@
               <td>{{ provider.provider_id }}</td>
               <td>{{ provider.name }}</td>
               <td>{{ provider.provider_type }}</td>
-              <td>{{ provider.region_id }}</td>
-              <td>{{ provider.status }}</td>
+              <td>{{ provider.region }}</td>
               <td>{{ provider.no_of_claims }}</td>
+              <td>{{ provider.status }}</td>
             </tr>
           </tbody>
         </table>

@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    apiUrl: 'https://dummyjson.com/c/129f-00df-4663-9f6a' 
+    apiUrl: 'https://dummyjson.com/c/bb70-bbde-4ff2-b9a2' 
 };

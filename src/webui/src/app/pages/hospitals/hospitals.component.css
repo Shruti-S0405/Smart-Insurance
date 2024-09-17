@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Full viewport height */
+    height: 10vh; /* Full viewport height */
     margin: 0; /* Remove default margins */
   }
   

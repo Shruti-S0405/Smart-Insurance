@@ -8,7 +8,7 @@ export interface ServiceProvider {
   provider_id: number;
   name: string;
   provider_type: string;
-  region_id: number;
+  region: string;
   status: string;
   no_of_claims: number;
 }
