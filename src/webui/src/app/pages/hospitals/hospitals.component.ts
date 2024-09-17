@@ -3,6 +3,7 @@ import { DataService } from '../../data.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../../../environments/environment.development';
+import { Router } from '@angular/router'; // Import the Router service
 
 export interface ServiceProvider {
   provider_id: number;
@@ -13,37 +14,39 @@ export interface ServiceProvider {
   no_of_claims: number;
 }
 
-export interface ServiceProviderDetails {
-  serviceProviderDetails: ServiceProvider[];
-}
-
-
 @Component({
   selector: 'app-hospitals',
   standalone: true,
   imports: [CommonModule, HttpClientModule],
-  providers: [DataService, HttpClientModule],
+  providers: [DataService],
   templateUrl: './hospitals.component.html',
-  styleUrl: './hospitals.component.css'
+  styleUrls: ['./hospitals.component.css']
 })
 export class HospitalsComponent implements OnInit {
 
   serviceProvider: ServiceProvider[] = [];
+  hospitalApiurl: string = environment.apiUrl; // Ensure this matches the environment file property
 
-  x:string = environment.apiUrl;
+  constructor(private dataService: DataService, private router: Router) { } // Inject the Router
 
   ngOnInit(): void {
-    this.dataService.getHospitals(this.x).subscribe(
+    this.fetchHospitals();
+  }
+
+  fetchHospitals(): void {
+    this.dataService.getHospitals().subscribe( // Call method without arguments
       (response: any) => {
         console.log(response);
-        this.serviceProvider = response.serviceProviderDetails; 
+        this.serviceProvider = response.serviceProviderDetails || [];
       },
       (error) => {
-        console.error('Error fetching data', error);
+        console.error('Error fetching hospital data', error);
       }
     );
   }
-  
 
-  constructor(private dataService: DataService){ }
+  viewDetails(provider: ServiceProvider): void {
+    // Navigate to the ClaimsComponent with the provider_id
+    this.router.navigate(['/claims', provider.provider_id]);
+  }
 }

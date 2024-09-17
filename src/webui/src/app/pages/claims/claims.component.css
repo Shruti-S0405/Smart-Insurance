@@ -1,0 +1,52 @@
+.header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh; /* Full viewport height */
+    margin: 0; /* Remove default margins */
+  }
+  
+  .header-text {
+    font-size: 24px;
+    text-align: center;
+    padding: 0;
+    background-color: transparent;
+  }
+  
+  .card-body {
+    padding: 0; /* Remove padding */
+  }
+  
+  .table {
+    width: 100%; /* Full width */
+  }
+  
+  /* Style for the dropdown */
+select {
+    background-color:grey; /* Light grey background for the dropdown */
+    border: 1px solid #ccc; /* Border color */
+    padding: 5px;
+    border-radius: 4px;
+  }
+  
+  /* Style for the selected status options */
+  .status-approved {
+    background-color: #d4edda; /* Light green background */
+    color: #155724; /* Dark green text */
+  }
+  
+  .status-rejected {
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24; /* Dark red text */
+  }
+  
+  .status-pending {
+    background-color: #d1ecf1; /* Light blue background */
+    color: #0c5460; /* Dark blue text */
+  }
+  
+  /* Optional: Style for the option elements in the dropdown */
+  option {
+    background-color: grey; /* Inherit the background color from the select element */
+  }
+  
