@@ -1,89 +1,60 @@
-<!-- <app-header></app-header>
-<div style = "padding-top: 50px;">
-<div class="container-fluid">
-    <div class="header-container">
-        <strong class="header-text">List of Claims submitted</strong>
-    </div>  
-  <div class="card-body">
-    
-    <div *ngIf="claimDetails && claimDetails.length > 0; else noData">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>S.No</th>
-            <th>Claim ID</th>
-            <th>Service Name</th>
-            <th>AI Check</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let claim of claimDetails; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ claim.claim_id }}</td>
-            <td>{{ claim.service_name }}</td>
-            <td>{{ claim.ai_check }}</td>
-            <td>{{ claim.status }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <ng-template #noData>
-      <p>No claim details available.</p>
-    </ng-template>
-  </div>
-</div>
-</div> -->
-
-
 <app-header></app-header>
 <div style="padding-top: 50px;">
     <div class="container-fluid">
         <div class="header-container">
-            <strong class="header-text">List of Service Providers and the number of Claims</strong>
+            <strong class="header-text">Apollo Hospitals</strong>
         </div>
         <div class="card-body">
-            <app-header></app-header>
-          
-                
-                <div *ngIf="claimDetails && claimDetails.length > 0; else noData">
-                  <table class="table table-bordered">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <strong>Total no of Claims: {{ claimDetails.length }}</strong>
+                </div>
+                <div class="d-flex align-items-center">
+                    <button (click)="navigateToStats()" class="btn btn-sm" style="background-color: #4b0082; color: #ffffff;">STATS</button>
+                    <select class="form-select ml-2 custom-select" (change)="onFilterChange($event)">
+                        <option value="all">All</option>
+                        <option value="approved">Approved</option>
+                        <option value="rejected">Rejected</option>
+                        <option value="pending">Pending</option>
+                    </select>
+                </div>
+            </div>
+            <div *ngIf="filteredClaimDetails && filteredClaimDetails.length > 0; else noData">
+                <table class="table table-bordered">
                     <thead>
-                      <tr>
-                        <th>Claim ID</th>
-                        <th>Service Name</th>
-                        <th>AI Check</th>
-                        <th>Status</th>
-                      </tr>
+                        <tr>
+                            <th>Claim ID</th>
+                            <th>Service Claimed</th>
+                            <th>AI Check</th>
+                            <th>Status</th>
+                        </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let claim of claimDetails; let i = index">
-                        <td>{{ claim.claim_id }}</td>
-                        <td>{{ claim.service_name }}</td>
-                        <td>{{ claim.ai_check }}</td>
-                        <td>
-                          <select 
-                            [(ngModel)]="claim.status"
-                            [ngClass]="{
-                              'status-approved': claim.status === 'approved',
-                              'status-rejected': claim.status === 'rejected',
-                              'status-pending': claim.status === 'pending'
-                            }"
-                            (change)="onStatusChange(claim.claim_id, $event)">
-                            <option value="approved" [selected]="claim.status === 'approved'">Approved</option>
-                            <option value="rejected" [selected]="claim.status === 'rejected'">Rejected</option>
-                            <option value="pending" [selected]="claim.status === 'pending'">Pending</option>
-                          </select>
-                        </td>
-                      </tr>
+                        <tr *ngFor="let claim of filteredClaimDetails; let i = index">
+                            <td>{{ claim.claim_id }}</td>
+                            <td>{{ claim.service_name }}</td>
+                            <td>{{ claim.ai_check }}</td>
+                            <td>
+                                <select 
+                                    [(ngModel)]="claim.status"
+                                    [ngClass]="{
+                                        'status-approved': claim.status === 'approved',
+                                        'status-rejected': claim.status === 'rejected',
+                                        'status-pending': claim.status === 'pending'
+                                    }"
+                                    (change)="onStatusChange(claim.claim_id, $event)">
+                                    <option value="approved" [selected]="claim.status === 'approved'">Approved</option>
+                                    <option value="rejected" [selected]="claim.status === 'rejected'">Rejected</option>
+                                    <option value="pending" [selected]="claim.status === 'pending'">Pending</option>
+                                </select>
+                            </td>
+                        </tr>
                     </tbody>
-                  </table>
-                </div>
-              
-                <ng-template #noData>
-                  <p>No claim details available.</p>
-                </ng-template>
-              </div>
+                </table>
             </div>
+            <ng-template #noData>
+                <p>No claims available.</p>
+            </ng-template>
         </div>
-    
+    </div>
+</div>

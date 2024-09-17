@@ -19,7 +19,7 @@ export class DataService {
 
   // Hardcoded API call to get claim details
   getClaimDetailsHardcoded(): Observable<any> {
-    const claimApiUrl = 'https://dummyjson.com/c/1911-4f40-44f9-a76c/claims';  // Hardcoded API for claims
+    const claimApiUrl = 'https://dummyjson.com/c/1db3-6a81-4a0a-b7cd/claims';  // Hardcoded API for claims
     return this.http.get(claimApiUrl);
   }
 }

@@ -1,14 +1,16 @@
-import { Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { MainComponent } from './pages/main/main.component';
 import { ClaimsComponent } from './pages/claims/claims.component';
-const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },  // Redirect to login as the default route
-  { path: '', component: LoginComponent },          // Login route
+import { AnalysisComponent } from './pages/analysis/analysis.component';
+
+export const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },  
+  { path: '', component: LoginComponent },         
   { path: 'main', component: MainComponent } ,
-  { path: 'claims/:provider_id', component: ClaimsComponent }           // Main route
+  { path: 'claims/:provider_id', component: ClaimsComponent } ,
+  { path: 'analysis', component: AnalysisComponent }          
 ];
 
 @NgModule({

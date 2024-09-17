@@ -1,40 +1,41 @@
 <div class="container-fluid">
-  <div class="header-container">
-      <strong class="header-text">List of Service Providers and the number of Claims</strong>
+    <div class="header-container">
+        <strong class="header-text">List of Service Providers and the number of Claims</strong>
+    </div>
+    <div class="card-body">
+        <div *ngIf="serviceProvider && serviceProvider.length > 0; else noData">
+            <table class="table table-bordered">
+                <thead style="background-color: #f8f9fa;">
+                    <tr>
+                        <th scope="col">S.No</th>
+                        <th scope="col">Service Provider ID</th>
+                        <th scope="col">Service Provider Name</th>
+                        <th scope="col">Provider Type</th>
+                        <th scope="col">Region</th>
+                        <th scope="col" class="text-center">No. of Claims</th> <!-- Added text-center class -->
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th> <!-- Added Action column -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let provider of serviceProvider; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ provider.provider_id }}</td>
+                        <td>{{ provider.name }}</td>
+                        <td>{{ provider.provider_type }}</td>
+                        <td>{{ provider.region }}</td>
+                        <td class="text-center">{{ provider.no_of_claims }}</td> <!-- Center aligned -->
+                        <td>{{ provider.status }}</td>
+                        <td>
+                            <button class="btn btn-sm custom-btn" (click)="viewDetails(provider)">View</button> <!-- Adjusted size and color -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ng-template #noData>
+            <p>No hospital data available.</p>
+        </ng-template>
+    </div>
   </div>
-  <div class="card-body">
-      <div *ngIf="serviceProvider && serviceProvider.length > 0; else noData">
-          <table class="table table-bordered">
-              <thead style="background-color: #f8f9fa;">
-                  <tr>
-                      <th scope="col">S.No</th>
-                      <th scope="col">Service Provider ID</th>
-                      <th scope="col">Service Provider Name</th>
-                      <th scope="col">Provider Type</th>
-                      <th scope="col">Region</th>
-                      <th scope="col">No. of Claims</th>
-                      <th scope="col">Status</th>
-                      <th scope="col">Action</th> <!-- Added Action column -->
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr *ngFor="let provider of serviceProvider; let i = index">
-                      <td>{{ i + 1 }}</td>
-                      <td>{{ provider.provider_id }}</td>
-                      <td>{{ provider.name }}</td>
-                      <td>{{ provider.provider_type }}</td>
-                      <td>{{ provider.region }}</td>
-                      <td>{{ provider.no_of_claims }}</td>
-                      <td>{{ provider.status }}</td>
-                      <td>
-                          <button class="btn btn-primary" (click)="viewDetails(provider)">View</button>
-                      </td> <!-- Added View button -->
-                  </tr>
-              </tbody>
-          </table>
-      </div>
-      <ng-template #noData>
-          <p>No hospital data available.</p>
-      </ng-template>
-  </div>
-</div>
+  
