@@ -5,10 +5,10 @@ import json
 class SmartInsuranceDatabase:
     def __init__(self):
         self.mydb=mysql.connector.connect(
-        host="localhost", 
-        user="root", 
-        password="password",
-        database="smartinsurance")
+        host="buxdbalgmzpodtuy7er4-mysql.services.clever-cloud.com", 
+        user="uikojejlkuq1vlas", 
+        password="cMA3SJW5eE69gAieSHuh",
+        database="buxdbalgmzpodtuy7er4")
 
         self.cur=self.mydb.cursor()
 
@@ -44,5 +44,5 @@ class SmartInsuranceDatabase:
 
 if __name__=='__main__':
     obj=SmartInsuranceDatabase()
-    result=obj.get_all_claims(5001)
+    result=obj.get_all_serviceprovider()
     print(result)
