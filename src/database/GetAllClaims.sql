@@ -1,4 +1,4 @@
-DELIMITER //
+ DELIMITER //
 DROP PROCEDURE IF EXISTS GetAllClaims //
 CREATE PROCEDURE GetAllClaims(
     IN serviceProvider_id INT
