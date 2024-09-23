@@ -49,6 +49,8 @@ export class HospitalsComponent implements OnInit {
   viewDetails(provider: ServiceProvider): void {
     // Navigate to the ClaimsComponent with the provider_id
     localStorage.setItem('claimid', provider.provider_id.toString());
+    localStorage.setItem('providername', provider.name);
+    localStorage.setItem('totalclaims', provider.no_of_claims.toString());
 
     this.router.navigate(['/claims', provider.provider_id]);
 

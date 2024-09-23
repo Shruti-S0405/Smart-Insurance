@@ -22,17 +22,27 @@ export interface ClaimDetail {
 export class ClaimsComponent implements OnInit {
 
   claimDetails: ClaimDetail[] = []; 
-  filteredClaimDetails: ClaimDetail[] = []; // For filtered claims
+  filteredClaimDetails: ClaimDetail[] = []; 
+  hospitalName: string = 'Unknown Hospital'; 
 
   constructor(private dataService: DataService, private router: Router) { }
 
   ngOnInit(): void {
+    const storedHospitalName = localStorage.getItem('providername');
+    if (storedHospitalName) {
+      this.hospitalName = storedHospitalName;
+    } else {
+      this.hospitalName = 'Unknown Hospital'; 
+    }
+
     this.fetchClaimDetails();
+    
   }
 
   fetchClaimDetails(): void {
     this.dataService.getClaimDetailsHardcoded().subscribe(
       (response: any) => {
+        console.log(response);
         this.claimDetails = response.claimDetails;
         this.filteredClaimDetails = this.claimDetails; // Initialize filtered claims
       },
@@ -56,8 +66,10 @@ export class ClaimsComponent implements OnInit {
     const filterValue = target.value;
     if (filterValue === 'all') {
       this.filteredClaimDetails = this.claimDetails;
-    } else {
+    } else if (filterValue === 'approved' || filterValue === 'rejected' || filterValue === 'pending') {
       this.filteredClaimDetails = this.claimDetails.filter(claim => claim.status === filterValue);
+    }else {
+      this.filteredClaimDetails = this.claimDetails.filter(claim => claim.ai_check === filterValue);
     }
   }
   navigateToStats(): void {

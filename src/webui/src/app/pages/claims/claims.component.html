@@ -2,20 +2,22 @@
 <div style="padding-top: 50px;">
     <div class="container-fluid">
         <div class="header-container">
-            <strong class="header-text">Apollo Hospitals</strong>
+            <strong class="header-text">{{hospitalName}}</strong>
         </div>
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div>
-                    <strong>Total no of Claims: {{ claimDetails.length }}</strong>
+                    <strong>Total Claims: {{ claimDetails.length }}</strong>
                 </div>
                 <div class="d-flex align-items-center">
                     <button (click)="navigateToStats()" class="btn btn-sm" style="background-color: #4b0082; color: #ffffff;">STATS</button>
-                    <select class="form-select ml-2 custom-select" (change)="onFilterChange($event)">
+                    <select class="form-select ml-2 custom-select" style="width: 200px;" (change)="onFilterChange($event)">
                         <option value="all">All</option>
                         <option value="approved">Approved</option>
                         <option value="rejected">Rejected</option>
                         <option value="pending">Pending</option>
+                        <option value="legitimate">Legitimate</option>
+                        <option value="fraudulent">Fraudulent</option>
                     </select>
                 </div>
             </div>
@@ -24,7 +26,7 @@
                     <thead>
                         <tr>
                             <th>Claim ID</th>
-                            <th>Service Claimed</th>
+                            <th>Services Claimed</th>
                             <th>AI Check</th>
                             <th>Status</th>
                         </tr>
