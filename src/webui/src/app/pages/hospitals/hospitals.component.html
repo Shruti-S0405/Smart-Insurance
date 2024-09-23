@@ -13,8 +13,8 @@
                         <th scope="col">Provider Type</th>
                         <th scope="col">Region</th>
                         <th scope="col" class="text-center">No. of Claims</th> <!-- Added text-center class -->
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th> <!-- Added Action column -->
+                        <th scope="col" class="text-center">Status</th>
+                        <th scope="col" class="text-center">Action</th> <!-- Added Action column -->
                     </tr>
                 </thead>
                 <tbody>
@@ -23,7 +23,7 @@
                         <td>{{ provider.provider_id }}</td>
                         <td>{{ provider.name }}</td>
                         <td>{{ provider.provider_type }}</td>
-                        <td>{{ provider.region }}</td>
+                        <td>{{ provider.region_id}}</td>
                         <td class="text-center">{{ provider.no_of_claims }}</td> <!-- Center aligned -->
                         <td>{{ provider.status }}</td>
                         <td>

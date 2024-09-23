@@ -8,7 +8,7 @@ import { environment } from '../environments/environment';  // Import environmen
 })
 export class DataService {
 
-  private hospitalApiUrl = environment.apiUrl;  // Use the correct URL from environment
+  private hospitalApiUrl = environment.apiUrl + '/getAllServiceProviders';  // Use the correct URL from environment
 
   constructor(private http: HttpClient) {}
 
@@ -19,7 +19,14 @@ export class DataService {
 
   // Hardcoded API call to get claim details
   getClaimDetailsHardcoded(): Observable<any> {
-    const claimApiUrl = 'https://dummyjson.com/c/1db3-6a81-4a0a-b7cd/claims';  // Hardcoded API for claims
+    const ClaimId = localStorage.getItem('claimid');
+    const claimApiUrl = environment.apiUrl + '/claims/'+ClaimId;  
     return this.http.get(claimApiUrl);
   }
 }
+
+// getMedication(userNAme: string| undefined): Observable<medication>{
+//   let headers = new HttpHeaders();
+//   headers = headers.set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+//   return this.http.get(this.apiUrl+userNAme+"/medicationCondition", {headers: headers}).pipe(map((response: any) => response));
+// }

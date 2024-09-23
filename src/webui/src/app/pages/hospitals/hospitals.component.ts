@@ -9,7 +9,7 @@ export interface ServiceProvider {
   provider_id: number;
   name: string;
   provider_type: string;
-  region: string;
+  region_id: string;
   status: string;
   no_of_claims: number;
 }
@@ -45,8 +45,12 @@ export class HospitalsComponent implements OnInit {
     );
   }
 
+
   viewDetails(provider: ServiceProvider): void {
     // Navigate to the ClaimsComponent with the provider_id
+    localStorage.setItem('claimid', provider.provider_id.toString());
+
     this.router.navigate(['/claims', provider.provider_id]);
+
   }
 }
