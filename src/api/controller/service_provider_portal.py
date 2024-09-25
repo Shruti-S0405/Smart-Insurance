@@ -1,13 +1,16 @@
 from flask import Flask, Blueprint, request, jsonify
 import json
+import pandas as pd
+import numpy
+import pickle
 
 from db.db import SmartInsuranceDatabase
 
 service_provider_portal_api_bp= Blueprint("serviceProviderPortalAPI",__name__)
 
 #commented for now
-# with open(r"Smart-Insurance\src\prediction\model.pkl", 'rb') as f:
-#     model = pickle.load(f)
+with open(r"Smart-Insurance\src\prediction\model.pkl", 'rb') as f:
+    model = pickle.load(f)
 
 
 @service_provider_portal_api_bp.route('/submit-claim', methods=['POST'])
@@ -20,7 +23,7 @@ def submit_claim():
         print('Received data:', data)
 
         InscClaimAmtReimbursed = data.get('InscClaimAmtReimbursed') 
-        DeductibleAmtPaid = data.get('DeductibleAmtPaid') 
+        DeductibleAmtPaid = float(data.get('DeductibleAmtPaid')) 
         RenalDiseaseIndicator = data.get('RenalDiseaseIndicator') 
         NoOfMonths_PartACov = data.get('NoOfMonths_PartACov') 
         NoOfMonths_PartBCov = data.get('NoOfMonths_PartBCov') 
@@ -40,9 +43,9 @@ def submit_claim():
         OPAnnualReimbursementAmt = data.get('OPAnnualReimbursementAmt') 
         OPAnnualDeductibleAmt = data.get('OPAnnualDeductibleAmt')
         #new text fields
-        ClaimID=data.get('ClaimID')
-        ServicesTaken=data.get('ServicesTaken')
-        ServicesTaken_list = s.split(',')
+        # ClaimID=data.get('ClaimID')
+        # ServicesTaken=data.get('ServicesTaken')
+        # ServicesTaken_list = ServicesTaken.split(',')
 
 
         print(InscClaimAmtReimbursed)
@@ -60,7 +63,7 @@ def submit_claim():
 
         #input data
         input_data=[InscClaimAmtReimbursed, DeductibleAmtPaid, RenalDiseaseIndicator, NoOfMonths_PartACov, NoOfMonths_PartBCov, ChronicCond_Alzheimer, ChronicCond_Heartfailure, ChronicCond_KidneyDisease, ChronicCond_Cancer, ChronicCond_ObstrPulmonary, ChronicCond_Depression, ChronicCond_Diabetes, ChronicCond_IschemicHeart, ChronicCond_Osteoporasis, ChronicCond_rheumatoidarthritis, ChronicCond_stroke, IPAnnualReimbursementAmt, IPAnnualDeductibleAmt, OPAnnualReimbursementAmt, OPAnnualDeductibleAmt]
-
+        print(input_data)
         input_data_df = pd.DataFrame([input_data], columns=columns)
         pred_lable=model.predict(input_data_df)
 
@@ -73,7 +76,9 @@ def submit_claim():
 
         #-----------------------updating in database--------------------------------
         #updating claims_services table
-        
+        #commmented for now
+        # obj=SmartInsuranceDatabase()
+        # obj.insertinto_claim_services(ClaimID,ServicesTaken_list)
 
 
 
