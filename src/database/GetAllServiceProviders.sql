@@ -1,5 +1,5 @@
 DELIMITER $$
-
+DROP PROCEDURE IF EXISTS GetAllServiceProviders $$
 CREATE PROCEDURE GetAllServiceProviders()
 BEGIN
     SELECT
@@ -10,7 +10,8 @@ BEGIN
         SP.`status`,
         SP.no_of_claims
     FROM
-        serviceprovider;
+        SERVICEPROVIDER SP;
 END$$
 
 DELIMITER ;
+

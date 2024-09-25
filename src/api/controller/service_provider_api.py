@@ -34,3 +34,12 @@ def get_member_details(id):
 def graph_data(id):
     result={"barData":{"values":[65,59,80,81,56,55,40],"label":"Dataset 1"},"pieData":{"values":[120,150,180,90],"labels":["Red","Blue","Yellow","Green"]}}
     return jsonify(result)
+
+@service_provider_api_bp.route('/<int:claim_id>/status', methods=['PUT'])
+def update_claim_status(claim_id):
+    obj=SmartInsuranceDatabase()
+    data = request.get_json()
+    status = data.get('status')
+    data=obj.update_claim_status(claim_id, status)
+    return jsonify({'status': "successfully updated"})
+

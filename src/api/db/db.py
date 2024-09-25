@@ -5,10 +5,11 @@ import json
 class SmartInsuranceDatabase:
     def __init__(self):
         self.mydb=mysql.connector.connect(
-        host="buxdbalgmzpodtuy7er4-mysql.services.clever-cloud.com", 
-        user="uikojejlkuq1vlas", 
-        password="cMA3SJW5eE69gAieSHuh",
-        database="buxdbalgmzpodtuy7er4")
+        host="13.202.73.204", 
+        user="root", 
+        password="dbpass",
+        database="db",
+        port=33669)
 
         self.cur=self.mydb.cursor()
 
@@ -28,7 +29,7 @@ class SmartInsuranceDatabase:
 
 
     def get_all_claims(self, id):
-        self.cur.callproc('GetAllClaims', [id])
+        self.cur.callproc('GetAllClaimss', [id])
         data={'claimDetails':[]}
 
         for result in self.cur.stored_results():
@@ -72,12 +73,37 @@ class SmartInsuranceDatabase:
             # Always close the cursor and connection, even if an error occurs
             self.cur.close()
             self.mydb.close()
-        
 
+
+    def insertinto_claims(self, provider_id, claim_id, ai_check, status='pending'):
+        try:
+            self.cur.callproc('InsertIntoClaims', [provider_id, claim_id, ai_check, status])
+            # Commit the transaction if necessary (depends on your procedure)
+            self.mydb.commit() 
+        except Exception as e:
+            # handle rollback
+            self.mydb.rollback()
+            print(f"An error occurred: {e}")
+        finally:
+            self.cur.close()
+            self.mydb.close()
+
+    def update_claim_status(self, claim_id, status):
+        try:
+            self.cur.callproc('UpdateClaimStatus', [claim_id, status])
+            # Commit the transaction if necessary (depends on your procedure)
+            self.mydb.commit() 
+        except Exception as e:
+            # handle rollback
+            self.mydb.rollback()
+            print(f"An error occurred: {e}")
+        finally:
+            self.cur.close()
+            self.mydb.close()
         
 
 
 if __name__=='__main__':
     obj=SmartInsuranceDatabase()
-    result=obj.get_medical_condition_count(5001)
+    result=obj.get_all_claims(5001)
     print(result)

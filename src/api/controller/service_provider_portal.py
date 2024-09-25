@@ -46,6 +46,7 @@ def submit_claim():
         # ClaimID=data.get('ClaimID')
         # ServicesTaken=data.get('ServicesTaken')
         # ServicesTaken_list = ServicesTaken.split(',')
+        #ProviderID=data.get('ProviderID')
 
 
         print(InscClaimAmtReimbursed)
@@ -71,14 +72,18 @@ def submit_claim():
 
         # print(f"{'Legitimate' if pred == 1 else 'Fraudulent'}")
         print(pred)
-
+        return jsonify({'status': "successfully"})
 
 
         #-----------------------updating in database--------------------------------
         #updating claims_services table
+
         #commmented for now
         # obj=SmartInsuranceDatabase()
         # obj.insertinto_claim_services(ClaimID,ServicesTaken_list)
+
+        # obj=SmartInsuranceDatabase()
+        # obj.insertinto_claims(ProviderID, ClaimID, pred, status='pending')
 
 
 
