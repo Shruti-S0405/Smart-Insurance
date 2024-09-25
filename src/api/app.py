@@ -5,7 +5,6 @@ from flask_cors import CORS
 #Blueprints
 from controller.service_provider_api import service_provider_api_bp
 from controller.service_provider_portal import service_provider_portal_api_bp
-# from controllers.login import member_api_bp
 
 app = Flask(__name__)
 CORS(app)

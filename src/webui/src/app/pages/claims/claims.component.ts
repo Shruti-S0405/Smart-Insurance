@@ -25,6 +25,7 @@ export class ClaimsComponent implements OnInit {
   claimDetails: ClaimDetail[] = []; 
   filteredClaimDetails: ClaimDetail[] = []; 
   hospitalName: string = 'Unknown Hospital'; 
+  searchTerm: string = ''; // Property to store search term
 
   constructor(private dataService: DataService, private router: Router) { }
 
@@ -37,7 +38,6 @@ export class ClaimsComponent implements OnInit {
     }
 
     this.fetchClaimDetails();
-    
   }
 
   fetchClaimDetails(): void {
@@ -62,6 +62,17 @@ export class ClaimsComponent implements OnInit {
     }
   }
 
+  // Search functionality based on Claim ID
+  onSearchTermChange(): void {
+    if (this.searchTerm.trim() === '') {
+      this.filteredClaimDetails = this.claimDetails; // Reset if no search term
+    } else {
+      this.filteredClaimDetails = this.claimDetails.filter(claim =>
+        claim.claim_id.toString().includes(this.searchTerm)
+      );
+    }
+  }
+
   onFilterChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
     const filterValue = target.value;
@@ -69,13 +80,12 @@ export class ClaimsComponent implements OnInit {
       this.filteredClaimDetails = this.claimDetails;
     } else if (filterValue === 'approved' || filterValue === 'rejected' || filterValue === 'pending') {
       this.filteredClaimDetails = this.claimDetails.filter(claim => claim.status === filterValue);
-    }else {
+    } else {
       this.filteredClaimDetails = this.claimDetails.filter(claim => claim.ai_check === filterValue);
     }
   }
+
   navigateToStats(): void {
-    this.router.navigate(['/analysis']); // Adjust route if necessary
-  }
+    this.router.navigate(['/analysis']); // Adjust route if necessary
+  }
 }
-
-

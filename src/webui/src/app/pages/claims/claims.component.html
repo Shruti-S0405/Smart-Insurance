@@ -8,7 +8,7 @@
       <div class="flex-1 overflow-y-auto">
         <main class="flex-1 overflow-x-hidden overflow-y-auto p-6">
           <h1 class="mb-4 text-3xl font-semibold text-gray-800">{{hospitalName}}</h1>
-  
+
           <!-- Header Section -->
           <div class="mb-4 flex items-center justify-between">
             <span class="text-xl font-semibold text-gray-700">Total Claims: {{ filteredClaimDetails.length }}</span>
@@ -33,7 +33,18 @@
               </select>
             </div>
           </div>
-  
+
+          <!-- Search by Claim ID -->
+          <div class="mb-4">
+            <input
+            type="text"
+            placeholder="Search by Claim ID"
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="onSearchTermChange()"
+            class="rounded-md border-gray-300 shadow-sm focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50"
+          />
+          </div>
+
           <!-- Claims Table -->
           <div class="overflow-hidden rounded-lg bg-white shadow">
             <table class="min-w-full leading-normal">
@@ -78,7 +89,7 @@
                         'bg-red-200': claim.status === 'rejected',
                         'bg-yellow-200': claim.status === 'pending'
                       }"
-                      class="w-32 rounded p-1"> <!-- Add padding for a better appearance -->
+                      class="w-32 rounded p-1">
                       
                       <select 
                         [(ngModel)]="claim.status"
@@ -90,12 +101,11 @@
                       </select>
                     </div>
                   </td>
-                  
                 </tr>
               </tbody>
             </table>
           </div>
-  
+
           <!-- No Data Template -->
           <ng-template #noData>
             <p class="text-center text-gray-500">No claims available.</p>
@@ -105,4 +115,3 @@
     </div>
   </main>
 </div>
-

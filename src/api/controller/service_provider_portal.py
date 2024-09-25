@@ -9,7 +9,7 @@ from db.db import SmartInsuranceDatabase
 service_provider_portal_api_bp= Blueprint("serviceProviderPortalAPI",__name__)
 
 #commented for now
-with open(r"Smart-Insurance\src\prediction\model.pkl", 'rb') as f:
+with open(r"C:\Users\shrut\OneDrive\Desktop\Smart-Insurance\Smart-Insurance\src\prediction\model.pkl", 'rb') as f:
     model = pickle.load(f)
 
 
