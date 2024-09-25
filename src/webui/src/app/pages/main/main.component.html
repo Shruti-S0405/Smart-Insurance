@@ -1,5 +1,11 @@
-<app-header></app-header>
-
-<div style = "padding-top: 50px;">
-    <app-hospitals></app-hospitals>
+<div class="flex h-screen">
+  <aside class="w-64 bg-gray-700 flex-shrink-0 fixed left-0 top-0 bottom-0 z-10">
+    <app-dashboard></app-dashboard>
+  </aside>
+  <main class="flex flex-col flex-grow ml-64">
+    <app-header></app-header>
+    <div class="flex-grow overflow-y-auto pt-10">
+      <app-hospitals></app-hospitals>
+    </div>
+  </main>
 </div>

@@ -10,7 +10,7 @@ def submit_claim():
     try:
         # Get the JSON data from the request
         data = request.get_json()
-        data = json.loads(data)
+        # data = json.loads(data)
         # Log the received data for debugging
         print('Received data:', data)
 

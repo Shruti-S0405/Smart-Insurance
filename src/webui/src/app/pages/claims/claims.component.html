@@ -1,62 +1,108 @@
-<app-header></app-header>
-<div style="padding-top: 50px;">
-    <div class="container-fluid">
-        <div class="header-container">
-            <strong class="header-text">{{hospitalName}}</strong>
-        </div>
-        <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <div>
-                    <strong>Total Claims: {{ claimDetails.length }}</strong>
-                </div>
-                <div class="d-flex align-items-center">
-                    <button (click)="navigateToStats()" class="btn btn-sm" style="background-color: #4b0082; color: #ffffff;">STATS</button>
-                    <select class="form-select ml-2 custom-select" style="width: 200px;" (change)="onFilterChange($event)">
-                        <option value="all">All</option>
+<div class="flex h-screen">
+  <aside class="w-64 bg-gray-700 flex-shrink-0">
+    <app-dashboard></app-dashboard>
+  </aside>
+  <main class="flex flex-col flex-grow">
+    <app-header></app-header>
+    <div class="flex-grow pt-20">
+      <div class="flex-1 overflow-y-auto">
+        <main class="flex-1 overflow-x-hidden overflow-y-auto p-6">
+          <h1 class="mb-4 text-3xl font-semibold text-gray-800">{{hospitalName}}</h1>
+  
+          <!-- Header Section -->
+          <div class="mb-4 flex items-center justify-between">
+            <span class="text-xl font-semibold text-gray-700">Total Claims: {{ filteredClaimDetails.length }}</span>
+            <div class="flex space-x-2">
+              <button 
+                class="flex items-center rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+                (click)="navigateToStats()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
+                </svg>
+                STATS
+              </button>
+              <select 
+                class="rounded-md border-gray-300 shadow-sm focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50"
+                (change)="onFilterChange($event)">
+                <option value="all">All</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+                <option value="pending">Pending</option>
+                <option value="legitimate">Legitimate</option>
+                <option value="fraudulent">Fraudulent</option>
+              </select>
+            </div>
+          </div>
+  
+          <!-- Claims Table -->
+          <div class="overflow-hidden rounded-lg bg-white shadow">
+            <table class="min-w-full leading-normal">
+              <thead>
+                <tr>
+                  <th class="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600">
+                    Claim ID
+                  </th>
+                  <th class="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600">
+                    Services Claimed
+                  </th>
+                  <th class="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600">
+                    AI Check
+                  </th>
+                  <th class="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600">
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let claim of filteredClaimDetails">
+                  <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                    <p class="text-gray-900 whitespace-no-wrap">{{ claim.claim_id }}</p>
+                  </td>
+                  <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                    <p class="text-gray-900 whitespace-no-wrap">{{ claim.service_name }}</p>
+                  </td>
+                  <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                    <span 
+                      class="rounded-full px-3 py-1 text-xs font-semibold"
+                      [ngClass]="{
+                        'bg-green-200 text-green-900': claim.ai_check === 'legitimate',
+                        'bg-red-200 text-red-900': claim.ai_check === 'fraudulent'
+                      }">
+                      {{ claim.ai_check }}
+                    </span>
+                  </td>
+                  <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                    <div 
+                      [ngClass]="{
+                        'bg-green-200': claim.status === 'approved',
+                        'bg-red-200': claim.status === 'rejected',
+                        'bg-yellow-200': claim.status === 'pending'
+                      }"
+                      class="w-32 rounded p-1"> <!-- Add padding for a better appearance -->
+                      
+                      <select 
+                        [(ngModel)]="claim.status"
+                        (ngModelChange)="onStatusChange(claim.claim_id, $event)"
+                        class="w-full rounded bg-white text-gray-900 border-0 focus:outline-none focus:ring focus:ring-purple-200 focus:ring-opacity-50">
                         <option value="approved">Approved</option>
                         <option value="rejected">Rejected</option>
                         <option value="pending">Pending</option>
-                        <option value="legitimate">Legitimate</option>
-                        <option value="fraudulent">Fraudulent</option>
-                    </select>
-                </div>
-            </div>
-            <div *ngIf="filteredClaimDetails && filteredClaimDetails.length > 0; else noData">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Claim ID</th>
-                            <th>Services Claimed</th>
-                            <th>AI Check</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let claim of filteredClaimDetails; let i = index">
-                            <td>{{ claim.claim_id }}</td>
-                            <td>{{ claim.service_name }}</td>
-                            <td>{{ claim.ai_check }}</td>
-                            <td>
-                                <select 
-                                    [(ngModel)]="claim.status"
-                                    [ngClass]="{
-                                        'status-approved': claim.status === 'approved',
-                                        'status-rejected': claim.status === 'rejected',
-                                        'status-pending': claim.status === 'pending'
-                                    }"
-                                    (change)="onStatusChange(claim.claim_id, $event)">
-                                    <option value="approved" [selected]="claim.status === 'approved'">Approved</option>
-                                    <option value="rejected" [selected]="claim.status === 'rejected'">Rejected</option>
-                                    <option value="pending" [selected]="claim.status === 'pending'">Pending</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <ng-template #noData>
-                <p>No claims available.</p>
-            </ng-template>
-        </div>
+                      </select>
+                    </div>
+                  </td>
+                  
+                </tr>
+              </tbody>
+            </table>
+          </div>
+  
+          <!-- No Data Template -->
+          <ng-template #noData>
+            <p class="text-center text-gray-500">No claims available.</p>
+          </ng-template>
+        </main>
+      </div>
     </div>
+  </main>
 </div>
+

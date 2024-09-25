@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../../data.service';
 import { HeaderComponent } from '../header/header.component';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 export interface ClaimDetail {
   claim_id: number;
@@ -15,7 +16,7 @@ export interface ClaimDetail {
 @Component({
   selector: 'app-claims',
   standalone: true,
-  imports: [CommonModule, FormsModule, HeaderComponent], 
+  imports: [CommonModule, FormsModule, HeaderComponent, DashboardComponent], 
   templateUrl: './claims.component.html',
   styleUrls: ['./claims.component.css']
 })
