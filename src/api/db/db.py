@@ -44,7 +44,6 @@ class SmartInsuranceDatabase:
         self.cur.callproc('GetMedicalConditionCount', [provider_id])
         data={'claimDetails':[]}
         l=[]
-
         for result in self.cur.stored_results():
             rows = result.fetchall()  # Fetch all rows
         for row in rows:
@@ -53,6 +52,11 @@ class SmartInsuranceDatabase:
         return(data)
         self.cur.close()
         self.mydb.close()
+
+    #database data updates
+
+    # def insertinto_claim_services
+
         
 
 
