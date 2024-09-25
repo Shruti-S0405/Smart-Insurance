@@ -1,48 +1,80 @@
 {
+<<<<<<< HEAD
   "hash": "18248820",
   "configHash": "4feeb9e4",
   "lockfileHash": "1eaeba12",
   "browserHash": "62c90556",
+=======
+  "hash": "6df55ca3",
+  "configHash": "f1eca495",
+  "lockfileHash": "647c93d3",
+  "browserHash": "58ffe068",
+>>>>>>> ab31a160e92155650fdbb1407b40e78e78addc6f
   "optimized": {
     "@angular/common": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
+<<<<<<< HEAD
       "fileHash": "e5a0a124",
+=======
+      "fileHash": "82090584",
+>>>>>>> ab31a160e92155650fdbb1407b40e78e78addc6f
       "needsInterop": false
     },
     "@angular/common/http": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
+<<<<<<< HEAD
       "fileHash": "6a62f31b",
+=======
+      "fileHash": "195d4a9d",
+>>>>>>> ab31a160e92155650fdbb1407b40e78e78addc6f
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
+<<<<<<< HEAD
       "fileHash": "3d7470e4",
+=======
+      "fileHash": "c57e8b96",
+>>>>>>> ab31a160e92155650fdbb1407b40e78e78addc6f
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
+<<<<<<< HEAD
       "fileHash": "ce565e97",
+=======
+      "fileHash": "d83b1e1b",
+>>>>>>> ab31a160e92155650fdbb1407b40e78e78addc6f
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
+<<<<<<< HEAD
       "fileHash": "8ad6f098",
+=======
+      "fileHash": "20b7d43b",
+>>>>>>> ab31a160e92155650fdbb1407b40e78e78addc6f
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
+<<<<<<< HEAD
       "fileHash": "791e53d9",
+=======
+      "fileHash": "7a1b33aa",
+>>>>>>> ab31a160e92155650fdbb1407b40e78e78addc6f
       "needsInterop": false
     },
     "@auth0/auth0-angular": {
       "src": "../../../../../node_modules/@auth0/auth0-angular/fesm2020/auth0-auth0-angular.mjs",
       "file": "@auth0_auth0-angular.js",
+<<<<<<< HEAD
       "fileHash": "1f8b8ecc",
       "needsInterop": false
     },
@@ -50,6 +82,9 @@
       "src": "../../../../../node_modules/@canvasjs/angular-charts/fesm2015/canvasjs-angular-charts.js",
       "file": "@canvasjs_angular-charts.js",
       "fileHash": "f651a976",
+=======
+      "fileHash": "e5cb93a5",
+>>>>>>> ab31a160e92155650fdbb1407b40e78e78addc6f
       "needsInterop": false
     }
   },

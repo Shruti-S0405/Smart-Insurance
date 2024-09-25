@@ -44,15 +44,36 @@ class SmartInsuranceDatabase:
         self.cur.callproc('GetMedicalConditionCount', [provider_id])
         data={'claimDetails':[]}
         l=[]
-
         for result in self.cur.stored_results():
             rows = result.fetchall()  # Fetch all rows
         for row in rows:
             l.append(row)
         data=dict(l)
-        return(data)
         self.cur.close()
         self.mydb.close()
+        return(data)
+
+    #database data updates
+
+    def insertinto_claim_services(self, claim_id, services_lst):
+        try:
+            for service in services_lst:
+                self.cur.callproc('InsertIntoClaimServices', [claim_id, service])
+            
+            # Commit the transaction if everything goes fine
+            self.mydb.commit()
+            
+        except Exception as e:
+            # Rollback in case of any error
+            self.mydb.rollback()
+            print(f"Error: {e}")
+        
+        finally:
+            # Always close the cursor and connection, even if an error occurs
+            self.cur.close()
+            self.mydb.close()
+        
+
         
 
 
