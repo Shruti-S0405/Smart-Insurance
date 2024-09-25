@@ -12,6 +12,9 @@ service_provider_portal_api_bp= Blueprint("serviceProviderPortalAPI",__name__)
 with open(r"Smart-Insurance\src\prediction\model.pkl", 'rb') as f:
     model = pickle.load(f)
 
+with open(r"Smart-Insurance\src\prediction\rf_model.pkl", 'rb') as f:
+    rf_model = pickle.load(f)
+
 
 @service_provider_portal_api_bp.route('/submit-claim', methods=['POST'])
 def submit_claim():
@@ -44,9 +47,9 @@ def submit_claim():
         OPAnnualDeductibleAmt = data.get('OPAnnualDeductibleAmt')
         #new text fields
         # ClaimID=data.get('ClaimID')
-        # ServicesTaken=data.get('ServicesTaken')
-        # ServicesTaken_list = ServicesTaken.split(',')
-        #ProviderID=data.get('ProviderID')
+        ServicesTaken=data.get('ServiceTaken')
+        ServicesTaken_list = ServicesTaken.split(',')
+        ProviderID=data.get('memberId')
 
 
         print(InscClaimAmtReimbursed)
@@ -60,30 +63,37 @@ def submit_claim():
 
         #---prediction-part
 
-        columns = ['InscClaimAmtReimbursed', 'DeductibleAmtPaid', 'RenalDiseaseIndicator', 'NoOfMonths_PartACov', 'NoOfMonths_PartBCov', 'ChronicCond_Alzheimer', 'ChronicCond_Heartfailure', 'ChronicCond_KidneyDisease', 'ChronicCond_Cancer', 'ChronicCond_ObstrPulmonary', 'ChronicCond_Depression', 'ChronicCond_Diabetes', 'ChronicCond_IschemicHeart', 'ChronicCond_Osteoporasis', 'ChronicCond_rheumatoidarthritis', 'ChronicCond_stroke', 'IPAnnualReimbursementAmt', 'IPAnnualDeductibleAmt', 'OPAnnualReimbursementAmt', 'OPAnnualDeductibleAmt']
-
+        # columns = ['InscClaimAmtReimbursed', 'DeductibleAmtPaid', 'RenalDiseaseIndicator', 'NoOfMonths_PartACov', 'NoOfMonths_PartBCov', 'ChronicCond_Alzheimer', 'ChronicCond_Heartfailure', 'ChronicCond_KidneyDisease', 'ChronicCond_Cancer', 'ChronicCond_ObstrPulmonary', 'ChronicCond_Depression', 'ChronicCond_Diabetes', 'ChronicCond_IschemicHeart', 'ChronicCond_Osteoporasis', 'ChronicCond_rheumatoidarthritis', 'ChronicCond_stroke', 'IPAnnualReimbursementAmt', 'IPAnnualDeductibleAmt', 'OPAnnualReimbursementAmt', 'OPAnnualDeductibleAmt']
+        columns = ['InscClaimAmtReimbursed', 'DeductibleAmtPaid', 'NoOfMonths_PartACov', 'NoOfMonths_PartBCov', 'ChronicCond_Alzheimer', 'ChronicCond_Heartfailure', 'ChronicCond_KidneyDisease', 'ChronicCond_Cancer', 'ChronicCond_ObstrPulmonary', 'ChronicCond_Depression', 'ChronicCond_Diabetes', 'ChronicCond_IschemicHeart', 'ChronicCond_Osteoporasis', 'ChronicCond_rheumatoidarthritis', 'ChronicCond_stroke', 'IPAnnualReimbursementAmt', 'IPAnnualDeductibleAmt', 'OPAnnualReimbursementAmt', 'OPAnnualDeductibleAmt']
         #input data
-        input_data=[InscClaimAmtReimbursed, DeductibleAmtPaid, RenalDiseaseIndicator, NoOfMonths_PartACov, NoOfMonths_PartBCov, ChronicCond_Alzheimer, ChronicCond_Heartfailure, ChronicCond_KidneyDisease, ChronicCond_Cancer, ChronicCond_ObstrPulmonary, ChronicCond_Depression, ChronicCond_Diabetes, ChronicCond_IschemicHeart, ChronicCond_Osteoporasis, ChronicCond_rheumatoidarthritis, ChronicCond_stroke, IPAnnualReimbursementAmt, IPAnnualDeductibleAmt, OPAnnualReimbursementAmt, OPAnnualDeductibleAmt]
+        #input_data=[InscClaimAmtReimbursed, DeductibleAmtPaid, RenalDiseaseIndicator, NoOfMonths_PartACov, NoOfMonths_PartBCov, ChronicCond_Alzheimer, ChronicCond_Heartfailure, ChronicCond_KidneyDisease, ChronicCond_Cancer, ChronicCond_ObstrPulmonary, ChronicCond_Depression, ChronicCond_Diabetes, ChronicCond_IschemicHeart, ChronicCond_Osteoporasis, ChronicCond_rheumatoidarthritis, ChronicCond_stroke, IPAnnualReimbursementAmt, IPAnnualDeductibleAmt, OPAnnualReimbursementAmt, OPAnnualDeductibleAmt]
+        input_data=[InscClaimAmtReimbursed, DeductibleAmtPaid, NoOfMonths_PartACov, NoOfMonths_PartBCov, ChronicCond_Alzheimer, ChronicCond_Heartfailure, ChronicCond_KidneyDisease, ChronicCond_Cancer, ChronicCond_ObstrPulmonary, ChronicCond_Depression, ChronicCond_Diabetes, ChronicCond_IschemicHeart, ChronicCond_Osteoporasis, ChronicCond_rheumatoidarthritis, ChronicCond_stroke, IPAnnualReimbursementAmt, IPAnnualDeductibleAmt, OPAnnualReimbursementAmt, OPAnnualDeductibleAmt]
         print(input_data)
         input_data_df = pd.DataFrame([input_data], columns=columns)
-        pred_lable=model.predict(input_data_df)
+        pred_lable=rf_model.predict(input_data_df)
 
-        pred="Legitimate" if pred_lable==1 else "Fraudulent"
-
+        pred="legitimate" if pred_lable==1 else "fraudulent"
+        # pred=pred.lower()
         # print(f"{'Legitimate' if pred == 1 else 'Fraudulent'}")
         print(pred)
-        return jsonify({'status': "successfully"})
+        # return jsonify({'status': "successfully updated"})
 
 
         #-----------------------updating in database--------------------------------
         #updating claims_services table
 
         #commmented for now
-        # obj=SmartInsuranceDatabase()
-        # obj.insertinto_claim_services(ClaimID,ServicesTaken_list)
+        obj=SmartInsuranceDatabase()
+        print("hi")
+        claim_id=obj.insertinto_claims(ProviderID, pred, status='pending')
+        print(claim_id)
 
-        # obj=SmartInsuranceDatabase()
-        # obj.insertinto_claims(ProviderID, ClaimID, pred, status='pending')
+        obj=SmartInsuranceDatabase()
+        a=obj.insertinto_claim_services(claim_id,ServicesTaken_list)
+
+        return jsonify({'status': "successfully updated"})
+
+
 
 
 

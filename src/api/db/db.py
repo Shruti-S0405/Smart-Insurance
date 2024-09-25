@@ -73,17 +73,34 @@ class SmartInsuranceDatabase:
             # Always close the cursor and connection, even if an error occurs
             self.cur.close()
             self.mydb.close()
+            return {"status":"success"}
 
-
-    def insertinto_claims(self, provider_id, claim_id, ai_check, status='pending'):
+    def insertinto_claims(self, provider_id, ai_check, status='pending'):
         try:
-            self.cur.callproc('InsertIntoClaims', [provider_id, claim_id, ai_check, status])
+            self.cur.callproc('InsertIntoClaims', [provider_id, ai_check, status])
             # Commit the transaction if necessary (depends on your procedure)
             self.mydb.commit() 
+            # claim_id = None
+            # result = self.cur.fetchone()
+            # if result:
+            #     claim_id = result[0]  # Assuming your procedure returns the claim_id
+
+            for result in self.cur.stored_results():
+                rows = result.fetchall()  # Fetch all rows
+            for row in rows:
+                result={"claim_id":row[0]}
+            claim_id=result["claim_id"]
+            
+            # Commit the transaction if no errors occurred
+            self.mydb.commit()
+
+            return claim_id
+
         except Exception as e:
             # handle rollback
             self.mydb.rollback()
             print(f"An error occurred: {e}")
+
         finally:
             self.cur.close()
             self.mydb.close()

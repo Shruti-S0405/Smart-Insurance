@@ -2,8 +2,8 @@
     display: flex;
     justify-content: center;  /* Horizontally center the chart */
     align-items: center;      /* Vertically center the chart */
-    height: 200vh;            /* Set height to full viewport height */
-    width: 200vw;             /* Set width to full viewport width */
+    height: 300vh;            /* Set height to full viewport height */
+    width: 300vw;             /* Set width to full viewport width */
   }
   
   /* Optionally, add padding or margins for better appearance */

@@ -19,7 +19,6 @@ export class AnimationChartComponent implements OnInit {
   chartOptions: any;  // Hold chart config
 
   ngOnInit(): void {
-    console.log("Hiii");
     console.log(this.fetchClaimStats()); 
     this.fetchClaimStats();  // Fetch the claim statistics when the component initializes
   }
@@ -41,8 +40,6 @@ export class AnimationChartComponent implements OnInit {
           this.legitimateClaims = providerData.legitimate ?? 0;
           this.fraudulentClaims = providerData.fraudulent ?? 0;
           this.totalClaims = this.legitimateClaims + this.fraudulentClaims;
-
-          console.log("fraud:", this.fraudulentClaims);
 
           // Re-initialize chart with updated data
           this.updateChartOptions();

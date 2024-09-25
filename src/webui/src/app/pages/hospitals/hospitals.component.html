@@ -1,10 +1,25 @@
 <div class="flex-1 overflow-y-auto pt-12">
   <div class="p-6">
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
+
+      <!-- Search Input -->
       <div class="px-6 py-4 border-b border-gray-200 font-semibold text-gray-800">
-        List of Service Providers and the number of Claims
+        <div class="flex justify-between items-center">
+          <div>List of Service Providers and the number of Claims</div>
+          <div class="flex items-center">
+            <input 
+              type="text" 
+              class="border border-gray-300 rounded-md px-3 py-1 text-sm" 
+              placeholder="Search by Service Provider ID" 
+              [(ngModel)]="searchQuery" 
+              (ngModelChange)="filterData()" 
+              aria-label="Search by Service Provider ID"
+            />
+          </div>
+        </div>
       </div>
-      <div *ngIf="serviceProvider && serviceProvider.length > 0; else noData">
+
+      <div *ngIf="filteredServiceProvider && filteredServiceProvider.length > 0; else noData">
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
@@ -19,7 +34,7 @@
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
-            <tr *ngFor="let provider of serviceProvider; let i = index">
+            <tr *ngFor="let provider of filteredServiceProvider; let i = index">
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ i + 1 }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ provider.provider_id }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ provider.name }}</td>
@@ -34,6 +49,7 @@
           </tbody>
         </table>
       </div>
+
       <ng-template #noData>
         <p class="px-6 py-4 text-gray-500">No hospital data available.</p>
       </ng-template>
