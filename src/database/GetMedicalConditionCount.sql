@@ -10,8 +10,9 @@ BEGIN
     FROM
         MEDICAL_CONDITION_COUNT MCC
 	JOIN 
-		PATIENT_MEDICAL_CONDITION_CODE PMCC ON 	MCC.condition_code = PMCC.condition_code;
+		PATIENT_MEDICAL_CONDITION_CODE PMCC ON 	MCC.condition_code = PMCC.condition_code
+	WHERE 
+		MCC.provider_id=serviceProvider_id;
 END$$
 
 DELIMITER ;
-

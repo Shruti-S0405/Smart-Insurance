@@ -9,4 +9,4 @@ BEGIN
     VALUES (p_claim_id, p_service_name);
 END //
 
-DELIMITER ;
+DELIMITER ; 
