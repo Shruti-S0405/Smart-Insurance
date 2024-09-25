@@ -27,5 +27,10 @@ def get_all_claims(id):
 @service_provider_api_bp.route('/member/<int:id>', methods=['GET'])
 def get_member_details(id):
     obj=SmartInsuranceDatabase()
-    result={"RenalDiseaseIndicator":"one", "ChronicCond_Alzheimer":"two", "ChronicCond_Heartfailure":"three", "ChronicCond_KidneyDisease":"four", "ChronicCond_Cancer":"five", "ChronicCond_ObstrPulmonary":"six", "ChronicCond_Depression":"seven", "ChronicCond_Diabetes":"eight", "ChronicCond_IschemicHeart":"nine", "ChronicCond_Osteoporasis":"ten", "ChronicCond_rheumatoidarthritis":"eleven", "ChronicCond_stroke":"twelve", "IPAnnualReimbursementAmt":"thirteen", "IPAnnualDeductibleAmt":"fourteen", "OPAnnualReimbursementAmt":"fifteen", "OPAnnualDeductibleAmt":"sixteen"}
+    data=obj.get_medical_condition_count(id)
+    return jsonify(data)
+
+@service_provider_api_bp.route('/chart-data', methods=['GET'])
+def graph_data(id):
+    result={"barData":{"values":[65,59,80,81,56,55,40],"label":"Dataset 1"},"pieData":{"values":[120,150,180,90],"labels":["Red","Blue","Yellow","Green"]}}
     return jsonify(result)

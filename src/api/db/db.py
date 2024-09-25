@@ -40,9 +40,23 @@ class SmartInsuranceDatabase:
         self.mydb.close()
         return(data)
 
+    def get_medical_condition_count(self,provider_id):
+        self.cur.callproc('GetMedicalConditionCount', [provider_id])
+        data={'claimDetails':[]}
+        l=[]
+
+        for result in self.cur.stored_results():
+            rows = result.fetchall()  # Fetch all rows
+        for row in rows:
+            l.append(row)
+        data=dict(l)
+        return(data)
+        self.cur.close()
+        self.mydb.close()
+        
 
 
 if __name__=='__main__':
     obj=SmartInsuranceDatabase()
-    result=obj.get_all_serviceprovider()
+    result=obj.get_medical_condition_count(5001)
     print(result)
