@@ -1,41 +1,42 @@
-<div class="container-fluid">
-    <div class="header-container">
-        <strong class="header-text">List of Service Providers and the number of Claims</strong>
-    </div>
-    <div class="card-body">
-        <div *ngIf="serviceProvider && serviceProvider.length > 0; else noData">
-            <table class="table table-bordered">
-                <thead style="background-color: #f8f9fa;">
-                    <tr>
-                        <th scope="col">S.No</th>
-                        <th scope="col">Service Provider ID</th>
-                        <th scope="col">Service Provider Name</th>
-                        <th scope="col">Provider Type</th>
-                        <th scope="col">Region</th>
-                        <th scope="col" class="text-center">No. of Claims</th> <!-- Added text-center class -->
-                        <th scope="col" class="text-center">Status</th>
-                        <th scope="col" class="text-center">Action</th> <!-- Added Action column -->
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let provider of serviceProvider; let i = index">
-                        <td>{{ i + 1 }}</td>
-                        <td>{{ provider.provider_id }}</td>
-                        <td>{{ provider.name }}</td>
-                        <td>{{ provider.provider_type }}</td>
-                        <td>{{ provider.region_id}}</td>
-                        <td class="text-center">{{ provider.no_of_claims }}</td> <!-- Center aligned -->
-                        <td>{{ provider.status }}</td>
-                        <td>
-                            <button class="btn btn-sm custom-btn" (click)="viewDetails(provider)">View</button> <!-- Adjusted size and color -->
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <ng-template #noData>
-            <p>No hospital data available.</p>
-        </ng-template>
+<div class="flex-1 overflow-y-auto pt-12">
+  <div class="p-6">
+    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+      <div class="px-6 py-4 border-b border-gray-200 font-semibold text-gray-800">
+        List of Service Providers and the number of Claims
+      </div>
+      <div *ngIf="serviceProvider && serviceProvider.length > 0; else noData">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">S.No</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service Provider ID</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service Provider Name</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Provider Type</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Region</th>
+              <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">No. of Claims</th>
+              <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+              <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr *ngFor="let provider of serviceProvider; let i = index">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ i + 1 }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ provider.provider_id }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ provider.name }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ provider.provider_type }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ provider.region_id }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">{{ provider.no_of_claims }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">{{ provider.status }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-center">
+                <button class="text-white bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded-md" (click)="viewDetails(provider)">View</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ng-template #noData>
+        <p class="px-6 py-4 text-gray-500">No hospital data available.</p>
+      </ng-template>
     </div>
   </div>
-  
+</div>

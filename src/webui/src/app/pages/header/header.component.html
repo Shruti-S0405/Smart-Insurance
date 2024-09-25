@@ -1,20 +1,40 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #2b004a">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <img src="assets/healthcare.png" alt="Healthcare Logo" style="height: 40px;" />
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+<header class="flex h-20 items-center justify-between border-b bg-white px-6 fixed top-0 right-0 left-64 z-20 shadow-md">
+  <div class="flex items-center">
+    <!-- Logo -->
+
+    <!-- Toggle Button for Mobile (Collapsed Navbar) -->
+    <button class="text-gray-500 focus:outline-none lg:hidden" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
     </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav mr-auto mb-2 mb-md-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#" style="color: #ffffff;">Home</a>
-        </li>
-      </ul>
-      <form class="d-flex" role="search">
-        <button class="btn" (click)="signOut()" style="color: #ffffff; border-color: #4b0082; background-color: transparent;">Log out</button>
-      </form>
+
+    <!-- Search Bar -->
+    <div class="relative mx-4 lg:mx-0">
+      <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+        <svg class="h-5 w-5 text-gray-500" viewBox="0 0 24 24" fill="none">
+          <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <input class="form-input w-32 sm:w-64 rounded-md pl-10 pr-4 focus:border-purple-500 focus:ring-purple-500" type="text" placeholder="Search">
     </div>
   </div>
-</nav>
+
+  <!-- Right Section (User Info and Logout) -->
+  <div class="flex items-center">
+    <!-- User Name and Dropdown Icon -->
+    <button class="flex items-center text-gray-700 hover:text-gray-900">
+      <span class="mx-2">Arjun</span>
+      <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+        <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" fill-rule="evenodd"/>
+      </svg>
+    </button>
+
+    <!-- Logout Button -->
+    <button class="ml-4 text-gray-700 hover:text-gray-900" (click)="signOut()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+      </svg>
+    </button>
+  </div>
+</header>

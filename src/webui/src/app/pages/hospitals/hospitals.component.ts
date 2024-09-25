@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../../../environments/environment.development';
 import { Router } from '@angular/router'; // Import the Router service
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 export interface ServiceProvider {
   provider_id: number;
@@ -17,7 +18,7 @@ export interface ServiceProvider {
 @Component({
   selector: 'app-hospitals',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule,DashboardComponent],
   providers: [DataService],
   templateUrl: './hospitals.component.html',
   styleUrls: ['./hospitals.component.css']
