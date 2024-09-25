@@ -23,6 +23,10 @@ export class DataService {
     const claimApiUrl = environment.apiUrl + '/claims/'+ClaimId;  
     return this.http.get(claimApiUrl);
   }
+
+  getClaimStats(): Observable<any> {
+    return this.http.get("https://dummyjson.com/c/e77a-a2c8-44d9-b6fe");
+  }
 }
 
 // getMedication(userNAme: string| undefined): Observable<medication>{

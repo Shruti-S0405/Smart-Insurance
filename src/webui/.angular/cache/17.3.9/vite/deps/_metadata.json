@@ -1,67 +1,73 @@
 {
-  "hash": "8f7b9304",
-  "configHash": "3713c9a8",
-  "lockfileHash": "42b8cf53",
-  "browserHash": "46e96e40",
+  "hash": "18248820",
+  "configHash": "4feeb9e4",
+  "lockfileHash": "1eaeba12",
+  "browserHash": "62c90556",
   "optimized": {
     "@angular/common": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-      "fileHash": "69df4aef",
+      "fileHash": "e5a0a124",
       "needsInterop": false
     },
     "@angular/common/http": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
-      "fileHash": "9e30d136",
+      "fileHash": "6a62f31b",
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "d274b02e",
+      "fileHash": "3d7470e4",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "4551f3da",
+      "fileHash": "ce565e97",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "02ad547e",
+      "fileHash": "8ad6f098",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "55ec1662",
+      "fileHash": "791e53d9",
       "needsInterop": false
     },
     "@auth0/auth0-angular": {
       "src": "../../../../../node_modules/@auth0/auth0-angular/fesm2020/auth0-auth0-angular.mjs",
       "file": "@auth0_auth0-angular.js",
-      "fileHash": "7b9d206e",
+      "fileHash": "1f8b8ecc",
+      "needsInterop": false
+    },
+    "@canvasjs/angular-charts": {
+      "src": "../../../../../node_modules/@canvasjs/angular-charts/fesm2015/canvasjs-angular-charts.js",
+      "file": "@canvasjs_angular-charts.js",
+      "fileHash": "f651a976",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-W4PQPVWU": {
-      "file": "chunk-W4PQPVWU.js"
+    "chunk-PLMXCRP4": {
+      "file": "chunk-PLMXCRP4.js"
     },
-    "chunk-ART5SGNY": {
-      "file": "chunk-ART5SGNY.js"
+    "chunk-MMW3MMFM": {
+      "file": "chunk-MMW3MMFM.js"
     },
-    "chunk-O3XUNVWT": {
-      "file": "chunk-O3XUNVWT.js"
+    "chunk-ECM6UQIX": {
+      "file": "chunk-ECM6UQIX.js"
     },
-    "chunk-T5WLB42T": {
-      "file": "chunk-T5WLB42T.js"
+    "chunk-M2F73YNM": {
+      "file": "chunk-M2F73YNM.js"
     },
-    "chunk-5SFZ2I7P": {
-      "file": "chunk-5SFZ2I7P.js"
+    "chunk-LTRQ44LT": {
+      "file": "chunk-LTRQ44LT.js"
     }
   }
 }
