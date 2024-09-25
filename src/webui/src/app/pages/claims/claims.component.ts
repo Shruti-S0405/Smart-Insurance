@@ -88,4 +88,8 @@ export class ClaimsComponent implements OnInit {
   navigateToStats(): void {
     this.router.navigate(['/analysis']); // Adjust route if necessary
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> d6dccc344b05023d0fa7d85e04a7d865b16f6b0e
